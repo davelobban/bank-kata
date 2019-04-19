@@ -68,12 +68,18 @@ Do it yourself first and then compare the solutions.*/
         [Test]
         public void When2000DepositedToBalance1000And500Withdrawn_ThenBalanceIs2500()
         {
-            var subject = WhenAccountOpenedWithBalanceOf1000();
-            WhenDepositMadeOf2000(subject);
-            subject.Withdraw(500, new DateTime(2012, 1, 14));
+            var subject = SetupAcceptanceTestScenario1();
             var actual = subject.GetBalance();
             var expected = 2500;
             Assert.AreEqual(expected, actual);
+        }
+
+        private static Account SetupAcceptanceTestScenario1()
+        {
+            var subject = WhenAccountOpenedWithBalanceOf1000();
+            WhenDepositMadeOf2000(subject);
+            subject.Withdraw(500, new DateTime(2012, 1, 14));
+            return subject;
         }
 
         [Test]
@@ -84,6 +90,17 @@ Do it yourself first and then compare the solutions.*/
             subject.Withdraw(600, new DateTime(2012, 1, 14));
             var actual = subject.GetBalance();
             var expected = 2400;
+            Assert.AreEqual(expected, actual);
+        }
+
+
+        [Test]
+        public void GetStatement_AcceptanceTest1_ThenFirstLineIsHeader()
+        {
+            var subject = SetupAcceptanceTestScenario1();
+            var statement = subject.GetStatement();
+            var actual = statement[0];
+            var expected = "date || credit || debit || balance";
             Assert.AreEqual(expected, actual);
         }
     }

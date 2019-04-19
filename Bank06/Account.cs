@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace Bank06
 {
@@ -25,5 +27,11 @@ namespace Bank06
         {
             _balance -= amount;
         }
+
+        public IList<string> GetStatement()
+        {
+            return new List<string> { "date || credit || debit || balance" };
+        }
+
     }
 }
