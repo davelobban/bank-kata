@@ -4,9 +4,12 @@ namespace Bank06
 {
     public class DepositTransaction : Transaction
     {
-        public TransType Type => TransType.Deposit;
-        internal DepositTransaction(int amount, DateTime date, int newBalance) : base(amount, date, newBalance)
+        private int _closingBalance;
+        public override TransType Type => TransType.Deposit;
+        public override int ClosingBalance => _closingBalance;
+        internal DepositTransaction(int amount, DateTime date, int balancePriorToPosting) : base(amount, date)
         {
+            _closingBalance = balancePriorToPosting + amount;
         }
     }
 }

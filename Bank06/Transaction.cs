@@ -10,16 +10,14 @@ namespace Bank06
             Withdrawal
         }
 
-        public TransType Type { get; }
+        public abstract TransType Type { get; }
         public int Amount => _ledgerPosting.Amount;
         public DateTime Date => _ledgerPosting.Date;
-        public int ClosingBalance { get; }
+        public abstract int ClosingBalance { get; }
         private readonly LedgerPosting _ledgerPosting;
-        internal Transaction(int amount, DateTime date, int newBalance)
+        internal Transaction(int amount, DateTime date)
         {
             _ledgerPosting = new LedgerPosting(amount, date);
-            ClosingBalance = newBalance;
-            Type = amount > 0 ? TransType.Deposit : TransType.Withdrawal;
         }
     }
 }
