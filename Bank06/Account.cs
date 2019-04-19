@@ -7,34 +7,31 @@ namespace Bank06
 {
     public class Account
     {
-        IList<Transaction> _transactions = new List<Transaction>();
-        private int _balance;
-
-        public Account(int openingBalance)
-        {
-            _balance = openingBalance;
-        }
+        readonly IList<Transaction> _transactions = new List<Transaction>();
 
         public int GetBalance()
         {
-            //return _balance;
-            return _transactions.Sum(t => t.Amount);
+            return _transactions.LastOrDefault()?.ClosingBalance ?? 0;
         }
 
         public void Deposit(int depositAmount, DateTime dateTime)
         {
-            _transactions.Add(new Transaction(depositAmount, dateTime));
+            var balance = GetBalance();
+            var newBalance = balance + depositAmount;
+            _transactions.Add(new Transaction(depositAmount, dateTime, newBalance));
         }
 
         public void Withdraw(int amount, DateTime dateTime)
         {
-            _transactions.Add(new Transaction(-amount, dateTime));
+            var balance = GetBalance();
+            var newBalance = balance - amount;
+            _transactions.Add(new Transaction(-amount, dateTime, newBalance));
         }
 
         public IList<StatementLine> GetStatement()
         {
             var statementLines=new List<StatementLine> { new StatementLineHeader( "date || credit || debit || balance") };
-            foreach (var transaction in _transactions)
+            foreach (var transaction in _transactions.OrderByDescending(t=>t.Date))
             {
                 statementLines.Add(new TransactionStatementLine(transaction));
             }
