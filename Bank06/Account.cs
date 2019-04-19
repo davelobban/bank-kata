@@ -20,5 +20,10 @@ namespace Bank06
         {
             _balance += depositAmount;
         }
+
+        public void Withdraw(int amount, DateTime dateTime)
+        {
+            _balance -= amount;
+        }
     }
 }

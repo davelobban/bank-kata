@@ -45,7 +45,7 @@ Do it yourself first and then compare the solutions.*/
         public void When2000DepositedToBalance0_ThenBalanceIs2000()
         {
             var subject = new Account(0);
-            subject.Deposit(2000, new DateTime(2012, 1, 13));
+            WhenDepositMadeOf2000(subject);
             var actual = subject.GetBalance();
             var expected = 2000;
             Assert.AreEqual(expected, actual);
@@ -54,11 +54,26 @@ Do it yourself first and then compare the solutions.*/
         public void When2000DepositedToBalance1000_ThenBalanceIs3000()
         {
             var subject = WhenAccountOpenedWithBalanceOf1000();
-            subject.Deposit(2000, new DateTime(2012, 1, 13));
+            WhenDepositMadeOf2000(subject);
             var actual = subject.GetBalance();
             var expected = 3000;
             Assert.AreEqual(expected, actual);
         }
 
+        private static void WhenDepositMadeOf2000(Account subject)
+        {
+            subject.Deposit(2000, new DateTime(2012, 1, 13));
+        }
+
+        [Test]
+        public void When2000DepositedToBalance1000And500Withdrawn_ThenBalanceIs2500()
+        {
+            var subject = WhenAccountOpenedWithBalanceOf1000();
+            WhenDepositMadeOf2000(subject);
+            subject.Withdraw(500, new DateTime(2012, 1, 14));
+            var actual = subject.GetBalance();
+            var expected = 2500;
+            Assert.AreEqual(expected, actual);
+        }
     }
 }
