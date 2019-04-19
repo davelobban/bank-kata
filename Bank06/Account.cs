@@ -27,30 +27,10 @@ namespace Bank06
             var newBalance = balance - amount;
             _transactions.Add(new Transaction(-amount, dateTime, newBalance));
         }
-
         public IList<StatementLine> GetStatement()
         {
-            var statementLines=new List<StatementLine> { new StatementLineHeader( "date || credit || debit || balance") };
-            foreach (var transaction in _transactions.OrderByDescending(t=>t.Date))
-            {
-                statementLines.Add(GetLine(transaction));
-            }
-            return statementLines;
-        }
-        //TransactionStatementLineFactory
-        public static TransactionStatementLine GetLine(Transaction transaction)
-        {
-            switch (transaction.Type)
-            {
-                case Transaction.TransType.Deposit:
-                    return new DepositTransactionStatementLine(transaction);
-                case Transaction.TransType.Withdrawal:
-                    return new WithdrawalTransactionStatementLine(transaction);
-                default:
-                    throw new NotSupportedException("Unknown transaction type");
-            }
-
-            
+            var transactions = _transactions;
+            return Statement.GetStatement(transactions);
         }
     }
 }
