@@ -75,5 +75,16 @@ Do it yourself first and then compare the solutions.*/
             var expected = 2500;
             Assert.AreEqual(expected, actual);
         }
+
+        [Test]
+        public void When2000DepositedToBalance1000And600Withdrawn_ThenBalanceIs2400()
+        {
+            var subject = WhenAccountOpenedWithBalanceOf1000();
+            WhenDepositMadeOf2000(subject);
+            subject.Withdraw(600, new DateTime(2012, 1, 14));
+            var actual = subject.GetBalance();
+            var expected = 2400;
+            Assert.AreEqual(expected, actual);
+        }
     }
 }
