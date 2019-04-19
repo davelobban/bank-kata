@@ -33,19 +33,24 @@ namespace Bank06
             var statementLines=new List<StatementLine> { new StatementLineHeader( "date || credit || debit || balance") };
             foreach (var transaction in _transactions.OrderByDescending(t=>t.Date))
             {
-                statementLines.Add(new TransactionStatementLine(transaction));
+                statementLines.Add(GetLine(transaction));
             }
             return statementLines;
         }
+        //TransactionStatementLineFactory
+        public static TransactionStatementLine GetLine(Transaction transaction)
+        {
+            switch (transaction.Type)
+            {
+                case Transaction.TransType.Deposit:
+                    return new DepositTransactionStatementLine(transaction);
+                case Transaction.TransType.Withdrawal:
+                    return new WithdrawalTransactionStatementLine(transaction);
+                default:
+                    throw new NotSupportedException("Unknown transaction type");
+            }
 
+            
+        }
     }
-
-    //internal class Statement
-    //{
-    //    internal class Statement(IList<Transaction> transactions )
-    //    {
-    //    }
-
-    //    internal List<StatementLine> Lines { }
-    //}
 }
