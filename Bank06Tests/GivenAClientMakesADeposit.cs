@@ -28,19 +28,35 @@ Do it yourself first and then compare the solutions.*/
         [Test]
         public void When1000DepositedToBalance0_ThenBalanceIs1000()
         {
-            var subject = new Account(0);
-            subject.Deposit(1000, new DateTime(2012, 1, 10));
+            var subject = WhenAccountOpenedWithBalanceOf1000();
             var actual = subject.GetBalance();
             var expected = 1000;
             Assert.AreEqual(expected, actual);
         }
+
+        private static Account WhenAccountOpenedWithBalanceOf1000()
+        {
+            var subject = new Account(0);
+            subject.Deposit(1000, new DateTime(2012, 1, 10));
+            return subject;
+        }
+
         [Test]
         public void When2000DepositedToBalance0_ThenBalanceIs2000()
         {
             var subject = new Account(0);
-            subject.Deposit(2000, new DateTime(2012, 1, 10));
+            subject.Deposit(2000, new DateTime(2012, 1, 13));
             var actual = subject.GetBalance();
             var expected = 2000;
+            Assert.AreEqual(expected, actual);
+        }
+        [Test]
+        public void When2000DepositedToBalance1000_ThenBalanceIs3000()
+        {
+            var subject = WhenAccountOpenedWithBalanceOf1000();
+            subject.Deposit(2000, new DateTime(2012, 1, 13));
+            var actual = subject.GetBalance();
+            var expected = 3000;
             Assert.AreEqual(expected, actual);
         }
 
