@@ -1,7 +1,7 @@
 Bank account kata
 =================
 
-#### (Kata created by [Sandro Mancuso](https://github.com/sandromancuso/Bank-kata). Still TODO: number 3, wrapping primitives & mumber 9).
+#### (Kata created by [Sandro Mancuso](https://github.com/sandromancuso/Bank-kata). Still TODO: number 3, wrapping primitives & number 9).
 
 Think of your personal bank account experience
 When in doubt, go for the simplest solution
