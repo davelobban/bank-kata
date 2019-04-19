@@ -24,17 +24,17 @@ namespace Bank06
         public void Deposit(int depositAmount, DateTime dateTime)
         {
             _transactions.Add(new Transaction(depositAmount, dateTime));
-            _balance += depositAmount;
         }
 
         public void Withdraw(int amount, DateTime dateTime)
         {
-            _balance -= amount;
+            _transactions.Add(new Transaction(-amount, dateTime));
         }
 
         public IList<string> GetStatement()
         {
-            return new List<string> { "date || credit || debit || balance" };
+            var statementLines=new List<string> { "date || credit || debit || balance" };
+            return statementLines;
         }
 
     }
