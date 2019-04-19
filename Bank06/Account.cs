@@ -18,14 +18,14 @@ namespace Bank06
         {
             var balance = GetBalance();
             var newBalance = balance + depositAmount;
-            _transactions.Add(new Transaction(depositAmount, dateTime, newBalance));
+            _transactions.Add(TransactionFactory.Get(depositAmount, dateTime, newBalance));
         }
 
         public void Withdraw(int amount, DateTime dateTime)
         {
             var balance = GetBalance();
             var newBalance = balance - amount;
-            _transactions.Add(new Transaction(-amount, dateTime, newBalance));
+            _transactions.Add(TransactionFactory.Get(-amount, dateTime, newBalance));
         }
         public IList<StatementLine> GetStatement()
         {

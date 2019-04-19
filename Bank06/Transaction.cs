@@ -2,7 +2,7 @@
 
 namespace Bank06
 {
-    public class Transaction
+    public abstract class Transaction
     {
         public enum TransType
         {
@@ -11,13 +11,13 @@ namespace Bank06
         }
 
         public TransType Type { get; }
-        public int Amount { get; }
-        public DateTime Date { get; }
+        public int Amount => _ledgerPosting.Amount;
+        public DateTime Date => _ledgerPosting.Date;
         public int ClosingBalance { get; }
+        private readonly LedgerPosting _ledgerPosting;
         internal Transaction(int amount, DateTime date, int newBalance)
         {
-            Amount = amount;
-            Date = date;
+            _ledgerPosting = new LedgerPosting(amount, date);
             ClosingBalance = newBalance;
             Type = amount > 0 ? TransType.Deposit : TransType.Withdrawal;
         }
