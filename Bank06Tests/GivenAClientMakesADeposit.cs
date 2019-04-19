@@ -115,7 +115,7 @@ Do it yourself first and then compare the solutions.*/
         public void GetStatement_AcceptanceTest1_ThenSecondLineIsTransaction3()
         {
             var statement = GetStatementForAcceptanceTestScenario1();
-            var actual = statement[1];
+            var actual = statement[1].Text;
             var expected = "14/01/2012 || || 500.00 || 2500.00";
             Assert.AreEqual(expected, actual);
         }
@@ -123,7 +123,7 @@ Do it yourself first and then compare the solutions.*/
         public void GetStatement_AcceptanceTest1_ThenThirdLineIsTransaction2()
         {
             var statement = GetStatementForAcceptanceTestScenario1();
-            var actual = statement[2];
+            var actual = statement[2].Text;
             var expected = "13/01/2012 || 2000.00 || || 3000.00";
             Assert.AreEqual(expected, actual);
         }
@@ -131,7 +131,7 @@ Do it yourself first and then compare the solutions.*/
         public void GetStatement_AcceptanceTest1_ThenFourthLineIsTransaction1()
         {
             var statement = GetStatementForAcceptanceTestScenario1();
-            var actual = statement[3];
+            var actual = statement[3].Text;
             var expected = "10/01/2012 || 1000.00 || || 1000.00";
             Assert.AreEqual(expected, actual);
         }

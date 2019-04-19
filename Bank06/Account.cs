@@ -34,10 +34,10 @@ namespace Bank06
         public IList<StatementLine> GetStatement()
         {
             var statementLines=new List<StatementLine> { new StatementLineHeader( "date || credit || debit || balance") };
-            //foreach (var transaction in _transactions)
-            //{
-            //    statementLines.Add($"{transaction.Date.ToShortDateString()} || || 500.00 || 2500.00");
-            //}
+            foreach (var transaction in _transactions)
+            {
+                statementLines.Add(new TransactionStatementLine(transaction));
+            }
             return statementLines;
         }
 

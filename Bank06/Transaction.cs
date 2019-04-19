@@ -2,7 +2,7 @@
 
 namespace Bank06
 {
-    internal class Transaction
+    public class Transaction
     {
         public int Amount { get; }
         public DateTime Date { get; }
