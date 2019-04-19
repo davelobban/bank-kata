@@ -4,21 +4,21 @@ namespace Bank06
 {
     public class Account
     {
-        private int v;
+        private int _balance;
 
-        public Account(int v)
+        public Account(int openingBalance)
         {
-            this.v = v;
+            _balance = openingBalance;
         }
 
         public int GetBalance()
         {
-            return 1000;
+            return _balance;
         }
 
-        public void Deposit(int i, DateTime dateTime)
+        public void Deposit(int depositAmount, DateTime dateTime)
         {
-            
+            _balance += depositAmount;
         }
     }
 }
