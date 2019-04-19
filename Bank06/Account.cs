@@ -31,23 +31,24 @@ namespace Bank06
             _transactions.Add(new Transaction(-amount, dateTime));
         }
 
-        public IList<string> GetStatement()
+        public IList<StatementLine> GetStatement()
         {
-            var statementLines=new List<string> { "date || credit || debit || balance" };
+            var statementLines=new List<StatementLine> { new StatementLineHeader( "date || credit || debit || balance") };
+            //foreach (var transaction in _transactions)
+            //{
+            //    statementLines.Add($"{transaction.Date.ToShortDateString()} || || 500.00 || 2500.00");
+            //}
             return statementLines;
         }
 
     }
 
-    internal class Transaction
-    {
-        public int Amount { get; }
-        public DateTime Date { get; }
+    //internal class Statement
+    //{
+    //    internal class Statement(IList<Transaction> transactions )
+    //    {
+    //    }
 
-        internal Transaction(int amount, DateTime date)
-        {
-            Amount = amount;
-            Date = date;
-        }
-    }
+    //    internal List<StatementLine> Lines { }
+    //}
 }

@@ -99,12 +99,12 @@ Do it yourself first and then compare the solutions.*/
         public void GetStatement_AcceptanceTest1_ThenFirstLineIsHeader()
         {
             var statement = GetStatementForAcceptanceTestScenario1();
-            var actual = statement[0];
+            var actual = statement[0].Text;
             var expected = "date || credit || debit || balance";
             Assert.AreEqual(expected, actual);
         }
 
-        private static IList<string> GetStatementForAcceptanceTestScenario1()
+        private static IList<StatementLine> GetStatementForAcceptanceTestScenario1()
         {
             var subject = SetupAcceptanceTestScenario1();
             var statement = subject.GetStatement();
