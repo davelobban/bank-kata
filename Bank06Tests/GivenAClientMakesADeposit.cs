@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Bank06;
 using NUnit.Framework;
 
@@ -97,10 +98,41 @@ Do it yourself first and then compare the solutions.*/
         [Test]
         public void GetStatement_AcceptanceTest1_ThenFirstLineIsHeader()
         {
-            var subject = SetupAcceptanceTestScenario1();
-            var statement = subject.GetStatement();
+            var statement = GetStatementForAcceptanceTestScenario1();
             var actual = statement[0];
             var expected = "date || credit || debit || balance";
+            Assert.AreEqual(expected, actual);
+        }
+
+        private static IList<string> GetStatementForAcceptanceTestScenario1()
+        {
+            var subject = SetupAcceptanceTestScenario1();
+            var statement = subject.GetStatement();
+            return statement;
+        }
+
+        [Test]
+        public void GetStatement_AcceptanceTest1_ThenSecondLineIsTransaction3()
+        {
+            var statement = GetStatementForAcceptanceTestScenario1();
+            var actual = statement[1];
+            var expected = "14/01/2012 || || 500.00 || 2500.00";
+            Assert.AreEqual(expected, actual);
+        }
+        [Test]
+        public void GetStatement_AcceptanceTest1_ThenThirdLineIsTransaction2()
+        {
+            var statement = GetStatementForAcceptanceTestScenario1();
+            var actual = statement[2];
+            var expected = "13/01/2012 || 2000.00 || || 3000.00";
+            Assert.AreEqual(expected, actual);
+        }
+        [Test]
+        public void GetStatement_AcceptanceTest1_ThenFourthLineIsTransaction1()
+        {
+            var statement = GetStatementForAcceptanceTestScenario1();
+            var actual = statement[3];
+            var expected = "10/01/2012 || 1000.00 || || 1000.00";
             Assert.AreEqual(expected, actual);
         }
     }
